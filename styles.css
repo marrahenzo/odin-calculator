@@ -99,14 +99,15 @@ body {
   bottom: 10px;
   font-size: 20px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  color: rgb(87, 87, 255);
 }
 
 #credits a {
   text-decoration: none;
-  color: black;
+  color: inherit;
 }
 
 #credits a img {
   position: relative;
-  bottom: -5px;
+  bottom: -8px;
 }

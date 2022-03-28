@@ -3,6 +3,7 @@ const screen = document.querySelector("#screen");
 const screenTop = screen.querySelector("#top-value");
 const screenBottom = screen.querySelector("#bottom-value");
 screenBottom.textContent = 0;
+const buttonPoint = document.querySelector("#btn-point");
 
 //Calculation variables
 let currentValue = 0;
@@ -21,18 +22,23 @@ allButtons.forEach((button) => {
       break;
     case "btn-delete":
       button.addEventListener("click", () => {
-        screenBottom.textContent = screenBottom.textContent.slice(0, -1);
+        if (screenBottom.textContent != 0)
+          screenBottom.textContent = screenBottom.textContent.slice(0, -1);
       });
       break;
     case "btn-equals":
       button.addEventListener("click", () => {
-        callOperation();
+        if (screenTop.textContent != "") {
+          buttonPoint.disabled = false;
+          updateScreen();
+        }
       });
       break;
     case "btn-sum":
       button.addEventListener("click", () => {
+        buttonPoint.disabled = false;
         if (screenTop.textContent != 0 && screenBottom.textContent != 0) {
-          callOperation();
+          updateScreen();
         }
         operator = "+";
         screenTop.textContent = screenBottom.textContent;
@@ -40,20 +46,22 @@ allButtons.forEach((button) => {
       });
       break;
     case "btn-subtract":
-      if (screenTop.textContent != 0 && screenBottom.textContent != 0) {
-        callOperation();
-      }
       button.addEventListener("click", () => {
+        buttonPoint.disabled = false;
+        if (screenTop.textContent != 0 && screenBottom.textContent != 0) {
+          updateScreen();
+        }
         operator = "-";
         screenTop.textContent = screenBottom.textContent;
         screenBottom.textContent = 0;
       });
       break;
     case "btn-multiply":
-      if (screenTop.textContent != 0 && screenBottom.textContent != 0) {
-        callOperation();
-      }
       button.addEventListener("click", () => {
+        buttonPoint.disabled = false;
+        if (screenTop.textContent != 0 && screenBottom.textContent != 0) {
+          updateScreen();
+        }
         operator = "*";
         screenTop.textContent = screenBottom.textContent;
         screenBottom.textContent = 0;
@@ -61,19 +69,27 @@ allButtons.forEach((button) => {
       break;
     case "btn-divide":
       button.addEventListener("click", () => {
+        buttonPoint.disabled = false;
+        if (screenTop.textContent != 0 && screenBottom.textContent != 0) {
+          updateScreen();
+        }
         operator = "/";
         screenTop.textContent = screenBottom.textContent;
         screenBottom.textContent = 0;
       });
       break;
-    default:
-      switch (button.textContent) {
-      }
+    case "btn-point":
       button.addEventListener("click", () => {
-        console.log(button.textContent);
+        if (!buttonPoint.disabled && screenBottom.textContent.length < 15)
+          screenBottom.textContent += button.textContent;
+        buttonPoint.disabled = true;
+      });
+      break;
+    default:
+      button.addEventListener("click", () => {
         if (screenBottom.textContent == "0")
           screenBottom.textContent = button.textContent;
-        else if (screenBottom.textContent.length < 18)
+        else if (screenBottom.textContent.length < 15)
           screenBottom.textContent += button.textContent;
       });
   }
@@ -81,26 +97,32 @@ allButtons.forEach((button) => {
 
 //Operator functions
 function add(num1, num2) {
-  return Number(num1) + Number(num2);
+  return num1 + num2;
 }
 
 function subtract(num1, num2) {
-  return Number(num1) - Number(num2);
+  return num1 - num2;
 }
 
 function multiply(num1, num2) {
-  return Number(num1) * Number(num2);
+  return num1 * num2;
 }
 
 function divide(num1, num2) {
-  return Number(num1) / Number(num2);
+  if (num2 == 0) {
+    screenTop.textContent = "Are you okay?";
+    result = 0;
+  } else result = num1 / num2;
+  return result;
 }
 
 function modulo(num1, num2) {
-  return Number(num1) % Number(num2);
+  return num1 % num2;
 }
 
 function operate(operator, num1, num2) {
+  num1 = Number(num1);
+  num2 = Number(num2);
   switch (operator) {
     case "+":
       return add(num1, num2);
@@ -120,12 +142,26 @@ function operate(operator, num1, num2) {
   }
 }
 
-function callOperation() {
-  screenTop.textContent = operate(
+//Call operate() and update the calculator screen
+function updateScreen() {
+  avoidNan();
+  let result = operate(
     operator,
     screenTop.textContent,
     screenBottom.textContent
   );
-  screenBottom.textContent = screenTop.textContent;
+  if (String(result).length > 15) result = String(result).slice(0, 15);
+  screenBottom.textContent = result;
+  screenTop.textContent = "";
   operator = "";
+}
+
+//Replaces minus, when left alone, by 0 to avoid errors
+function avoidNan() {
+  if (screenBottom.textContent == "-") {
+    screenBottom.textContent = 0;
+  }
+  if (screenTop.textContent == "-") {
+    screenTop.textContent = 0;
+  }
 }

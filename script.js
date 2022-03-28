@@ -4,6 +4,7 @@ const screenTop = screen.querySelector("#top-value");
 const screenBottom = screen.querySelector("#bottom-value");
 screenBottom.textContent = 0;
 const buttonPoint = document.querySelector("#btn-point");
+const divByZeroMessage = "Someone didn't go to math class...";
 
 //Calculation variables
 let currentValue = 0;
@@ -28,9 +29,15 @@ allButtons.forEach((button) => {
       break;
     case "btn-equals":
       button.addEventListener("click", () => {
-        if (screenTop.textContent != "") {
+        if (
+          screenTop.textContent != "" &&
+          screenTop.textContent != divByZeroMessage
+        ) {
           buttonPoint.disabled = false;
           updateScreen();
+        } else if (screenTop.textContent == divByZeroMessage) {
+          buttonPoint.disabled = false;
+          screenTop.textContent = "";
         }
       });
       break;
@@ -87,6 +94,9 @@ allButtons.forEach((button) => {
       break;
     default:
       button.addEventListener("click", () => {
+        if (screenTop.textContent == divByZeroMessage) {
+          screenTop.textContent = "";
+        }
         if (screenBottom.textContent == "0")
           screenBottom.textContent = button.textContent;
         else if (screenBottom.textContent.length < 15)
@@ -110,7 +120,7 @@ function multiply(num1, num2) {
 
 function divide(num1, num2) {
   if (num2 == 0) {
-    screenTop.textContent = "Are you okay?";
+    screenTop.textContent = divByZeroMessage;
     result = 0;
   } else result = num1 / num2;
   return result;
@@ -152,7 +162,9 @@ function updateScreen() {
   );
   if (String(result).length > 15) result = String(result).slice(0, 15);
   screenBottom.textContent = result;
-  screenTop.textContent = "";
+  if (screenTop.textContent != divByZeroMessage) {
+    screenTop.textContent = "";
+  }
   operator = "";
 }
 

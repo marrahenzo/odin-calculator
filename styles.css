@@ -1,15 +1,9 @@
 body {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
-}
-
-#screen,
-#btn-clear,
-#btn-delete,
-.calc-btn {
-  border: 2px solid black;
-  border-radius: 7px;
+  height: 98vh;
 }
 
 #calculator {
@@ -23,6 +17,14 @@ body {
   border: 2px solid black;
   border-radius: 20px;
   margin-top: 10px;
+}
+
+#screen,
+#btn-clear,
+#btn-delete,
+.calc-btn {
+  border: 2px solid black;
+  border-radius: 7px;
 }
 
 #screen {

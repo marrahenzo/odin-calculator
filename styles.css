@@ -27,6 +27,8 @@ body {
 }
 
 #screen {
+  display: flex;
+  flex-direction: column;
   background-color: white;
   width: 400px;
   margin-top: 20px;
@@ -38,7 +40,14 @@ body {
     "Lucida Sans", Arial, sans-serif;
 }
 
-#screen span {
+#top-value {
+  margin-bottom: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  font-size: 20px;
+}
+
+#bottom-value {
   padding-right: 15px;
   padding-bottom: 15px;
   font-size: 40px;
@@ -104,7 +113,7 @@ body {
   bottom: 5px;
   font-size: 20px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  color: rgb(87, 87, 255);
+  color: black;
 }
 
 #credits a {

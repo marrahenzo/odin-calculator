@@ -43,46 +43,32 @@ allButtons.forEach((button) => {
       break;
     case "btn-sum":
       button.addEventListener("click", () => {
-        buttonPoint.disabled = false;
-        if (screenTop.textContent != 0 && screenBottom.textContent != 0) {
-          updateScreen();
-        }
+        callGenericOperation();
         operator = "+";
-        screenTop.textContent = screenBottom.textContent;
-        screenBottom.textContent = 0;
       });
       break;
     case "btn-subtract":
       button.addEventListener("click", () => {
-        buttonPoint.disabled = false;
-        if (screenTop.textContent != 0 && screenBottom.textContent != 0) {
-          updateScreen();
-        }
+        callGenericOperation();
         operator = "-";
-        screenTop.textContent = screenBottom.textContent;
-        screenBottom.textContent = 0;
       });
       break;
     case "btn-multiply":
       button.addEventListener("click", () => {
-        buttonPoint.disabled = false;
-        if (screenTop.textContent != 0 && screenBottom.textContent != 0) {
-          updateScreen();
-        }
+        callGenericOperation();
         operator = "*";
-        screenTop.textContent = screenBottom.textContent;
-        screenBottom.textContent = 0;
       });
       break;
     case "btn-divide":
       button.addEventListener("click", () => {
-        buttonPoint.disabled = false;
-        if (screenTop.textContent != 0 && screenBottom.textContent != 0) {
-          updateScreen();
-        }
+        callGenericOperation();
         operator = "/";
-        screenTop.textContent = screenBottom.textContent;
-        screenBottom.textContent = 0;
+      });
+      break;
+    case "btn-modulo":
+      button.addEventListener("click", () => {
+        callGenericOperation();
+        operator = "%";
       });
       break;
     case "btn-point":
@@ -176,4 +162,14 @@ function avoidNan() {
   if (screenTop.textContent == "-") {
     screenTop.textContent = 0;
   }
+}
+
+//Repeated code in button event listeners
+function callGenericOperation() {
+  buttonPoint.disabled = false;
+  if (screenTop.textContent != 0 && screenBottom.textContent != 0) {
+    updateScreen();
+  }
+  screenTop.textContent = screenBottom.textContent;
+  screenBottom.textContent = 0;
 }

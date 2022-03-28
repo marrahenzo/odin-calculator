@@ -69,6 +69,7 @@ body {
 
 #btn-clear,
 #btn-delete {
+  color: black;
   text-align: center;
   height: 70px;
   display: flex;
@@ -80,11 +81,27 @@ body {
 }
 
 #btn-clear {
-  background-color: rgb(255, 93, 93);
+  background-color: rgb(255, 124, 124);
+}
+
+#btn-clear:hover {
+  background-color: rgb(255, 81, 81);
+}
+
+#btn-clear:active {
+  background-color: rgb(255, 0, 0);
 }
 
 #btn-delete {
   background-color: rgb(93, 93, 255);
+}
+
+#btn-delete:hover {
+  background-color: rgb(31, 31, 255);
+}
+
+#btn-delete:active {
+  background-color: rgb(15, 15, 255);
 }
 
 .calc-btn {
@@ -102,6 +119,53 @@ body {
   -ms-user-select: none;
   user-select: none;
   color: rgb(212, 212, 212);
+}
+
+.calc-btn:hover {
+  background-color: rgb(27, 27, 27);
+}
+
+.calc-btn:active {
+  background-color: rgb(10, 10, 10);
+}
+
+.calc-btn#btn-modulo:hover {
+  background-color: #3e1010;
+}
+.calc-btn#btn-modulo:active {
+  background-color: #2b0b0b;
+}
+
+.calc-btn#btn-divide:hover {
+  background-color: rgb(160, 160, 0);
+}
+
+.calc-btn#btn-divide:active {
+  background-color: rgb(92, 92, 0);
+}
+
+.calc-btn#btn-multiply:hover {
+  background-color: rgb(1, 124, 1);
+}
+
+.calc-btn#btn-multiply:active {
+  background-color: rgb(0, 70, 0);
+}
+
+.calc-btn#btn-subtract:hover {
+  background-color: red;
+}
+
+.calc-btn#btn-subtract:active {
+  background-color: rgb(122, 0, 0);
+}
+
+.calc-btn#btn-sum:hover {
+  background-color: blue;
+}
+
+.calc-btn#btn-sum:active {
+  background-color: rgb(0, 0, 121);
 }
 
 .calc-btn#btn-equals {

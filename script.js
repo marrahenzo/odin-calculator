@@ -1,13 +1,13 @@
 //DOM variables
 const screen = document.querySelector("#screen");
 const screenTop = screen.querySelector("#top-value");
+screenTop.textContent = 0;
 const screenBottom = screen.querySelector("#bottom-value");
 screenBottom.textContent = 0;
 const buttonPoint = document.querySelector("#btn-point");
 const divByZeroMessage = "Someone didn't go to math class...";
 
 //Calculation variables
-let currentValue = 0;
 let operator = "";
 
 //Sets up the calculator buttons
@@ -18,7 +18,6 @@ allButtons.forEach((button) => {
       button.addEventListener("click", () => {
         screenBottom.textContent = 0;
         screenTop.textContent = "";
-        currentValue = 0;
       });
       break;
     case "btn-delete":
@@ -88,6 +87,74 @@ allButtons.forEach((button) => {
         else if (screenBottom.textContent.length < 15)
           screenBottom.textContent += button.textContent;
       });
+  }
+});
+
+//Alternate code for keyboard input
+document.addEventListener("keydown", (event) => {
+  switch (event.key) {
+    case "Delete":
+      screenBottom.textContent = 0;
+      screenTop.textContent = "";
+      break;
+    case "Backspace":
+      if (screenBottom.textContent != 0)
+        screenBottom.textContent = screenBottom.textContent.slice(0, -1);
+      break;
+    case "Enter":
+      if (
+        screenTop.textContent != "" &&
+        screenTop.textContent != divByZeroMessage
+      ) {
+        buttonPoint.disabled = false;
+        updateScreen();
+      } else if (screenTop.textContent == divByZeroMessage) {
+        buttonPoint.disabled = false;
+        screenTop.textContent = "";
+      }
+      break;
+    case "+":
+      callGenericOperation();
+      operator = "+";
+      break;
+    case "-":
+      callGenericOperation();
+      operator = "-";
+      break;
+    case "*":
+      callGenericOperation();
+      operator = "*";
+      break;
+    case "/":
+      callGenericOperation();
+      operator = "/";
+      break;
+    case "%":
+      callGenericOperation();
+      operator = "%";
+      break;
+    case ".":
+      if (!buttonPoint.disabled && screenBottom.textContent.length < 15)
+        screenBottom.textContent += button.textContent;
+      buttonPoint.disabled = true;
+      break;
+    case "1":
+    case "2":
+    case "3":
+    case "4":
+    case "5":
+    case "6":
+    case "7":
+    case "8":
+    case "9":
+    case "0":
+      if (screenTop.textContent == divByZeroMessage) {
+        screenTop.textContent = "";
+      }
+      if (screenBottom.textContent == "0") screenBottom.textContent = event.key;
+      else if (screenBottom.textContent.length < 15)
+        screenBottom.textContent += event.key;
+      break;
   }
 });
 

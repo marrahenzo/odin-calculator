@@ -42,15 +42,7 @@ body {
     "Lucida Sans", Arial, sans-serif;
 }
 
-#top-value {
-  margin-bottom: 15px;
-  padding-right: 15px;
-  padding-top: 5px;
-  font-size: 20px;
-  color: rgb(212, 212, 212);
-}
-
-#bottom-value {
+#screen-value {
   padding-right: 15px;
   padding-bottom: 15px;
   font-size: 40px;
